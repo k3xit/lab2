@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 let rec inputInt () = 
     printf "Введите целое число для поиска: "
@@ -8,18 +8,18 @@ let rec inputInt () =
         printfn "Ошибка, повторите ввод"
         inputInt ()
 
-let rec CreateList InputList =
+let rec createList inputList =
     printfn "Введите целое число для добавления в список: "
     let inputLine = Console.ReadLine()
     if inputLine <> "" then 
         match System.Int32.TryParse(inputLine) with
-        | true, conInt -> CreateList (InputList @ [conInt])
+        | true, conInt -> createList (inputList @ [conInt])
         | _ -> 
             printfn "Ошибка, повторите ввод"
-            CreateList InputList
-    else InputList
+            createList inputList
+    else inputList
 
-let MatchNumber elem X =
+let matchNumber elem X =
     if (elem=X) then 
         1
     else 
@@ -30,7 +30,7 @@ let MatchNumber elem X =
 let main args =
     printfn "Создание списка"
     printfn "Введите пустую строку для конца"
-    let aList = CreateList [] 
+    let aList = createList [] 
     printfn "Готовый список: %A" aList
     let a = inputInt ()
     let b = List.fold (fun acc elem -> 
