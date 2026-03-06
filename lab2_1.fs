@@ -1,33 +1,34 @@
-﻿open System
+open System
 
-let rec CreateList InputList =
+let rec createList inputList =
     printfn "Введите целое число для добавления в список: "
     let inputLine = Console.ReadLine()
     if (inputLine <> "") then 
         match System.Int32.TryParse(inputLine) with
-        | (true, conInt) -> CreateList (InputList @ [conInt])
+        | (true, conInt) -> createList (inputList @ [conInt])
         | _ -> 
             printfn "Ошибка, повторите ввод"
-            CreateList InputList
-    else InputList
-let AbsoluteInt X =
+            createList inputList
+    else 
+        inputList
+let absoluteInt X =
     if (X<0) then 
         -X
     else 
         X
 
-let rec FirstNum X =
-    let Y = AbsoluteInt X
+let rec firstNum X =
+    let Y = absoluteInt X
     if ((Y/10)=0) then 
         Y
     else 
-        FirstNum (Y/10)
+        firstNum (Y/10)
 [<EntryPoint>]
 let main args =
     printfn "Создание изначального списка"
     printfn "Введите пустую строку для конца"
-    let aList = CreateList [] 
-    let bList = List.map FirstNum aList
-
+    let aList = createList [] 
+    printfn "Изначальный список: %A" aList
+    let bList = List.map firstNum aList
     printfn "Итоговый список из первых цифр: %A" bList
     0
